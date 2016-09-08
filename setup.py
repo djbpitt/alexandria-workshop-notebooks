@@ -7,5 +7,5 @@ setup(name='AlexandriaNotebook',
       description='Alexandria notebook utils',
       author='HuygensING',
       author_email='alexandria@huygens.knaw.nl',
-      packages=['alexandria']
+      packages=['alexandria.notebook']
       )

@@ -11,12 +11,15 @@ COPY data/* ${vol}/examples/data/
 RUN mkdir -p ${vol}/work
 RUN chown -R jovyan ${vol}
 
-ENV wd=/tmp
-ADD . ${wd}
-WORKDIR ${wd}
+ENV tmp=/tmp
+ADD . ${tmp}
+WORKDIR ${tmp}
 USER jovyan
 RUN pip install --user pydot
 RUN python setup.py install --user
+RUN git clone https://github.com/HuygensING/alexandria-python-client.git && \
+    cd alexandria-python-client && \
+    python setup.py install --user
 
 WORKDIR ${vol}
 
