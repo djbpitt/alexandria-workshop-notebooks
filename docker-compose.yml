@@ -1,0 +1,11 @@
+version: '2'
+services:
+    jupyter:
+      build: .
+      ports:
+        - "80:9999"
+      depends_on:
+         - alexandria
+
+    alexandria:
+      image: huygensing/alexandria:develop

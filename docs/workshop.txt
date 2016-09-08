@@ -1,0 +1,23 @@
+- dockerize alexandria
+- dockerize alexandria notebook
+  - install alexandria-python-client
+  - install alexandria-notebook
+  - link workdir to local directory
+  - copy notebook template to workdir
+
+
+Annotation
+TextAnnotation
+resource.add_annotation(annotation)
+resource.add_text_annotation(textAnnotation)
+resource.get_annotations()
+resource.get_text_annotations()
+resource.get_annotation(uuid)
+resource.get_text_annotation(uuid)
+
+annotation.add_annotation(annotation)
+annotation.get_annotations()
+annotation.get_annotation(uuid)
+
+alexandria.query(query)
+Query()
