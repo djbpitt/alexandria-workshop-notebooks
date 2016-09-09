@@ -23,5 +23,6 @@ RUN git clone https://github.com/HuygensING/alexandria-python-client.git && \
 
 WORKDIR ${vol}
 
+EXPOSE 8888
 ENTRYPOINT jupyter notebook
 VOLUME ${vol}/work

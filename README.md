@@ -7,4 +7,4 @@
 `docker build -t huygensing/alexandria-workshop .`
 
 ### to run the docker image:
-`docker run -d huygensing/alexandria-workshop`
+`docker run -d -p${local_port}:8888 -v ${local_workdir}:/data/work huygensing/alexandria-workshop`
