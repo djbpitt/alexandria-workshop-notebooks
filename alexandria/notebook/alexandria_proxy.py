@@ -5,7 +5,7 @@ from alexandria.notebook.resource_proxy import ResourceProxy
 
 
 class AlexandriaProxy:
-    def __init__(self, server_url, admin_key):
+    def __init__(self, server_url, admin_key="admin"):
         self.alexandria = Alexandria(server_url, admin_key=admin_key)
 
     def __dir__(self):

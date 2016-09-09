@@ -45,5 +45,8 @@ class ResourceProxy:
     def add_unique_ids(self, elements):
         return self.resources.add_unique_ids(self.uuid, elements)
 
+    def add_text_annotation(self, text_annotation):
+        return self.resources.set_text_annotation(self.uuid, text_annotation)
+
     def __str__(self):
         return "ResourceProxy::" + self.id
