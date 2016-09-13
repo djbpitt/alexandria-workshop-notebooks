@@ -11,9 +11,12 @@ class AlexandriaProxy:
     def __dir__(self):
         return ['create_resource', 'get_resource']
 
-    def create_resource(self, resource_id):
-        uuid = self.alexandria.resources.add(ResourcePrototype(resource_id)).uuid
-        rp = ResourceProxy(resource_id, uuid, self.alexandria)
+    def add_text(self, path):
+        uuid = self.alexandria.resources.add(ResourcePrototype(path)).uuid
+        rp = ResourceProxy(path, uuid, self.alexandria)
+        with open(path, 'r') as f:
+            xml = f.read()
+        self.alexandria.resources.set_text(uuid,xml)
         return rp
 
     def get_resource(self, resource_id):
