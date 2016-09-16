@@ -8,6 +8,7 @@ class ResourceProxy:
     def __init__(self, resource_id: str, uuid: str, alexandria: Alexandria):
         self.id = resource_id
         self.uuid = uuid
+        self.alexandria = alexandria
         self.resources = alexandria.resources
 
     def __dir__(self):
@@ -47,6 +48,14 @@ class ResourceProxy:
 
     def add_text_annotation(self, text_annotation):
         return self.resources.set_text_annotation(self.uuid, text_annotation)
+
+    def xpath(self, xpath, view_name=None):
+        id = self.uuid
+        if view_name is not None:
+            id = id + ":" + view_name
+        resource_view_ids = [id]
+        result = self.alexandria.do_xpath(resource_view_ids, xpath)['result'][id]
+        return result
 
     def __str__(self):
         return "ResourceProxy::" + self.id

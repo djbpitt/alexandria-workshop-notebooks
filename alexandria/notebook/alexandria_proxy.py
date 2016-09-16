@@ -23,3 +23,6 @@ class AlexandriaProxy:
         uuid = ''
         rp = ResourceProxy(resource_id, uuid, self.alexandria)
         return rp
+
+    def xpath(self,ids,xpath):
+        return self.commands.xpath()
