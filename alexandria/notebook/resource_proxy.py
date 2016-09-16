@@ -50,12 +50,24 @@ class ResourceProxy:
         return self.resources.set_text_annotation(self.uuid, text_annotation)
 
     def xpath(self, xpath, view_name=None):
-        id = self.uuid
+        _id = self.uuid
         if view_name is not None:
-            id = id + ":" + view_name
-        resource_view_ids = [id]
-        result = self.alexandria.do_xpath(resource_view_ids, xpath)['result'][id]
-        return result
+            _id = _id + ":" + view_name
+        resource_view_ids = [_id]
+        wrapper = self.alexandria.do_xpath(resource_view_ids, xpath)
+        errors = wrapper['errorLines']
+        if not errors:
+            return wrapper['result'][_id]
+        else:
+            raise AlexandriaError(errors)
 
     def __str__(self):
         return "ResourceProxy::" + self.id
+
+
+class AlexandriaError(Exception):
+    def __init__(self, value):
+        self.value = value
+
+    def __str__(self):
+        return repr(self.value)
