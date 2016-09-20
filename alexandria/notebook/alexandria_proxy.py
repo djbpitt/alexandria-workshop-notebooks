@@ -9,14 +9,14 @@ class AlexandriaProxy:
         self.alexandria = Alexandria(server_url, admin_key=admin_key)
 
     def __dir__(self):
-        return ['create_resource', 'get_resource']
+        return ['add_text', 'get_resource', 'aql2']
 
     def add_text(self, path):
         uuid = self.alexandria.resources.add(ResourcePrototype(path)).uuid
         rp = ResourceProxy(path, uuid, self.alexandria)
         with open(path, 'r') as f:
             xml = f.read()
-        self.alexandria.resources.set_text(uuid,xml)
+        self.alexandria.resources.set_text(uuid, xml)
         return rp
 
     def get_resource(self, resource_id):
@@ -24,5 +24,8 @@ class AlexandriaProxy:
         rp = ResourceProxy(resource_id, uuid, self.alexandria)
         return rp
 
-    def xpath(self,ids,xpath):
+    def aql2(self, aql2_command):
+        return self.alexandria.aql2(aql2_command)
+
+    def xpath(self, ids, xpath):
         return self.commands.xpath()

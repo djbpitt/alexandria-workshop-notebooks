@@ -12,7 +12,9 @@ class ResourceProxy:
         self.resources = alexandria.resources
 
     def __dir__(self):
-        return ['id', 'uuid', 'set_xml', 'get_xml', 'export_dot', 'show_graph', 'set_view']
+        return ['id', 'uuid', 'set_xml', 'get_xml', 'export_dot', 'show_graph',
+                'set_view', 'set_annotator', 'get_annotators', 'add_unique_ids',
+                'add_text_annotation', 'xpath']
 
     def set_xml(self, xml):
         self.resources.set_text(self.uuid, xml)
