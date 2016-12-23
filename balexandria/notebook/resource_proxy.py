@@ -8,10 +8,13 @@ class ResourceProxy:
     def __init__(self, resource_id: str, uuid: str, alexandria: Alexandria):
         self.id = resource_id
         self.uuid = uuid
+        self.alexandria = alexandria
         self.resources = alexandria.resources
 
     def __dir__(self):
-        return ['id', 'uuid', 'set_xml', 'get_xml', 'export_dot', 'show_graph', 'set_view']
+        return ['id', 'uuid', 'set_xml', 'get_xml', 'export_dot', 'show_graph',
+                'set_view', 'set_annotator', 'get_annotators', 'add_unique_ids',
+                'add_text_annotation', 'xpath']
 
     def set_xml(self, xml):
         self.resources.set_text(self.uuid, xml)
@@ -48,5 +51,25 @@ class ResourceProxy:
     def add_text_annotation(self, text_annotation):
         return self.resources.set_text_annotation(self.uuid, text_annotation)
 
+    def xpath(self, xpath, view_name=None):
+        _id = self.uuid
+        if view_name is not None:
+            _id = _id + ":" + view_name
+        resource_view_ids = [_id]
+        wrapper = self.alexandria.do_xpath(resource_view_ids, xpath)
+        errors = wrapper['errorLines']
+        if not errors:
+            return wrapper['result'][_id]
+        else:
+            raise AlexandriaError(errors)
+
     def __str__(self):
         return "ResourceProxy::" + self.id
+
+
+class AlexandriaError(Exception):
+    def __init__(self, value):
+        self.value = value
+
+    def __str__(self):
+        return repr(self.value)
